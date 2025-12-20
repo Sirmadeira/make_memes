@@ -11,8 +11,20 @@ async def main():
         tab = await browser.start()
         await tab.go_to('https://www.reddit.com/r/dankmemes/best/')
         await tab.go_to('https://www.reddit.com/r/dankmemes/best/')
-        await asyncio.sleep(5)
+        element = await tab.find(class_name="post-background-image-filter")
+        image = element.get_attribute("src")        
+        print(image)
+        
+        await asyncio.sleep(1000000)
+
+
+
+        browser.close()
 
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+
+# absolute top-1/2 -translate-y-1/2 left-0 w-full h-full opacity-30 object-cover scale-[1.2] post-background-image-filter
+# Class for images
