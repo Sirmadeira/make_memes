@@ -11,22 +11,35 @@ async def main():
         tab = await browser.start()
         await tab.go_to('https://www.reddit.com/r/dankmemes/best/')
         await tab.go_to('https://www.reddit.com/r/dankmemes/best/')
-        element = await tab.find(class_name="post-background-image-filter")
-        image = element.get_attribute("src")        
-        # print(image)
 
 
-        number = await tab.find(tag_name="faceplate-number")
-        number_2 =  number.get_attribute("number")
 
-        print(number_2)
+
+        title_element = await tab.query("//a//faceplate-screen-reader-content")
+        print(await title_element.text)
+
+
+
+
+        image_element = await tab.find(class_name="post-background-image-filter")
+        image = image_element.get_attribute("src")        
+        print(image)
+
+
+        upvote_number = await tab.query("//span//faceplate-number[@number]",find_all=True,timeout=5)
+        print(upvote_number)
+
+
+
+
 
         # upvote_container = await tab.query('data-post-click-location="vote"')
-        # print(upvote_container)
+        # print(await upvote_container.inner_html)
 
         # descendants = await upvote_container.get_children_elements(max_depth=2)
-        # await tab.execute_script("window.scrollBy(0, 1000)")
 
+
+        await tab.execute_script("window.scrollBy(0, 1000)")
         await asyncio.sleep(1000000)
 
 
