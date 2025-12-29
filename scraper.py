@@ -90,10 +90,12 @@ def extract_meme_data_reddit(loaded_jsons: list[dict]) -> pl.DataFrame:
     return df
 
 
-def setup_logging():
+def setup_logging(time: str):
+    now = datetime.now()
+    formatted = now.strftime("%Y-%m-%d%H:%M:%S.%f")[:-3]
     logging.basicConfig(
         level=logging.DEBUG,
-        filename="scraper.log",
+        filename=f"logs/scraper_run_{formatted}.log",
         filemode="w",
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
@@ -103,8 +105,9 @@ def setup_logging():
 
 
 if __name__ == "__main__":
-    setup_logging()
-
+    now = datetime.now()
+    formatted = now.strftime("%Y-%m-%d%H:%M:%S.%f")[:-3]
+    setup_logging(time=formatted)
     SUBREDDITS = [
         "https://www.reddit.com/r/dankmemes/",
         "https://www.reddit.com/r/memes/",
@@ -115,7 +118,4 @@ if __name__ == "__main__":
     # Slight Transform
     df = extract_meme_data_reddit(loaded_jsons)
     # Dump
-    # Get current datetime
-    now = datetime.now()
-    formatted = now.strftime("%Y-%m-%d%H:%M:%S.%f")[:-3]
-    df.write_parquet(f"data/reddit_data_from_{formatted}.parquet")
+    df.write_parquet(f"data/reddit_data_{formatted}.parquet")
