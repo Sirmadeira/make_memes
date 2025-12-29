@@ -1,0 +1,11 @@
+# Py should be ignored by default
+.venv
+__pycache__/
+*.pyc
+# Git should be ignored by default
+.git
+.gitignore
+# Data should be ignores as all this docker scrip does is run in a safe environment
+/data
+# Vscode
+./vscode
