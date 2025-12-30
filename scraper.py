@@ -112,7 +112,7 @@ if __name__ == "__main__":
         "https://www.reddit.com/r/Memes_Of_The_Dank/",
     ]
     # Extract
-    loaded_jsons = fetch_all_reddit_json(SUBREDDITS, limit=100)
+    loaded_jsons = fetch_all_reddit_json(SUBREDDITS, limit=200)
     # Slight Transform
     df = extract_meme_data_reddit(loaded_jsons)
     # Dump
