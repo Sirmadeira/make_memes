@@ -103,6 +103,7 @@ def setup_logging(time: str):
 
 
 if __name__ == "__main__":
+    now = datetime.now()
     formatted = now.strftime("%Y_%m_%d%_H:%M:%S.%f")[:-3]
     setup_logging(time=formatted)
     SUBREDDITS = [
