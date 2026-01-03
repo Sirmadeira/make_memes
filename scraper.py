@@ -6,6 +6,7 @@ from pathlib import Path
 from datetime import datetime
 
 
+# https://roundproxies.com/blog/reddit/
 def get_reddit_jsons(
     subreddits: list[str], sort="hot", pages=5, limit=100, timeframe="all"
 ) -> list[dict]:
@@ -52,7 +53,7 @@ def get_reddit_jsons(
                 if not after:
                     break
 
-                time.sleep(0.2)
+                time.sleep(1.0)
 
     logging.debug(f"Sample json:{all_posts[0]}")
     return all_posts
@@ -132,7 +133,7 @@ if __name__ == "__main__":
         "https://www.reddit.com/r/Memes_Of_The_Dank/",
     ]
     # Extract
-    all_posts = get_reddit_jsons(SUBREDDITS, pages=5)
+    all_posts = get_reddit_jsons(SUBREDDITS, pages=10)
     # Transform to dataframe
     df = extract_meme_data_reddit(all_posts)
     # Dump
